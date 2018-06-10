@@ -18,3 +18,6 @@ Define uma Categoria do discord para sincronizar com os novos canais criados pel
 
 ### VoiceStateUpdate:
 Emite eventos quando um membro entra ou sai de um canal de voz.
+
+## Obs:
+Api bugada(incompleta)
