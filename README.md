@@ -1,6 +1,6 @@
 # DiscordBot
 
-## Commands:
+## Comandos:
 
 ### !check
 Verifica quantas pessoas em um canal de voz.
