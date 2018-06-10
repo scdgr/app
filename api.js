@@ -32,13 +32,9 @@ sequelize.authenticate().then(() => {
 
 var Servers = sequelize.define('Servers', {
     id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    server_id: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        primarykey: true
     },
     name: {
         type: Sequelize.STRING,
@@ -46,10 +42,29 @@ var Servers = sequelize.define('Servers', {
     }
 })
 
+var TempChannles = sequelize.define('TempChannel', {
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    channel_id: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    channel_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    }
+})
+
+Servers.hasMany(TempChannles);
+TempChannles.belongsTo(Servers);
+
 Servers.sync()
+TempChannles.sync()
 
-
-module.exports = (app) => {
+module.exports = (app, client) => {
     app.set('json spaces', 2);
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
@@ -81,5 +96,14 @@ module.exports = (app) => {
             }).catch(error => {
                 res.status(412).json({ msg: error.message })
             })
+        });
+    app.get('/server/:id', (req, res) => {
+            Servers.findOne({
+                where: {
+                    server_id: req.params.server_id
+                }
+            }).then(result => res.send(result))
+                .catch(err => res.status(412).json({ msg: error.message }));
         })
+    
 }

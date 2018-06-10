@@ -8,7 +8,6 @@ const Axios = require('axios');
 const app = express();
 const api = require('./api.js');
 
-api(app);
 
 
 
@@ -146,7 +145,5 @@ client.on('message', msg => {
 
 })
 
-
-
-
+api(app, client);
 client.login(token);
