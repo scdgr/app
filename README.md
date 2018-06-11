@@ -1,4 +1,5 @@
 # DiscordBot
+Por enquanto, nada funciona
 
 ## Comandos:
 
